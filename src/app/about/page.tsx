@@ -16,9 +16,9 @@ import config from "../config";
   return response;
 }; */
 
-const About = async () => {
-  /*   const data = await fetchData();
-  console.log(data.data[0].attributes.Description[0].children[0].text); */
+const About = /* async  */ () => {
+  /* const data = await fetchData();
+  console.log(data.data[0]); */
   return <h1>About</h1>;
 };
 
