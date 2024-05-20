@@ -26,8 +26,6 @@ const Blogs = () => {
   return (
     <>
       <div className="  bg-parallax bg-fixed  bg-no-repeat w-full bg-cover bg-center h-[100vh]">
-        {/*         <div className="absolute w-full h-full bg-[linear-gradient(0deg,rgba(0,0,0,0.75)_6.82%,rgba(0,0,0,0.00)_81.44%)]" />
-         */}
         <Image
           src={wawe}
           alt="wave"

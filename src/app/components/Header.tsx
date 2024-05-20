@@ -31,8 +31,6 @@ export default function Header() {
     { id: 5, text: "CONTACT", link: "/contact" },
   ];
 
-  const bg = "bg-black";
-
   return (
     <header className="sticky z-40 w-full top-0  ">
       <div
