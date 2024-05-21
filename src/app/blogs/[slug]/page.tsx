@@ -2,27 +2,32 @@
 
 /* import test from "../../../public/images/test.jpg"; */
 import Image from "next/image";
-import fetchData from "@/app/getAllBlogs";
 import config from "@/app/config";
 import {
   BlocksRenderer,
   type BlocksContent,
 } from "@strapi/blocks-react-renderer";
-import Newsletter from "@/app/components/Newsletter";
+import Newsletter from "@/app/components/layout/Newsletter";
 import RecentBlogs from "@/app/components/RecentBlogs";
 
 import bogWave from "../../../../public/images/blogWave.svg";
 import qs from "qs";
 import useSWR from "swr";
+import bgWaveGray from "../../../../public/images/bgWaveGray.svg";
+import bgWaveWhite from "../../../../public/images/bgWaveWhite.svg";
 
-const a = "https://mdbcdn.b-cdn.net/img/new/avatars/1.webp";
+interface BlogSiteProps {
+  params: {
+    slug: string;
+  };
+}
 
-export default function BlogSite(prop: any) {
+export default function BlogSite({ params }: BlogSiteProps) {
   const query = qs.stringify({
     populate: "*",
     filters: {
       slug: {
-        $eq: prop.params.slug,
+        $eq: params.slug,
       },
     },
   });
@@ -45,15 +50,15 @@ export default function BlogSite(prop: any) {
 
   // Check if data is available
   if (!currBlogData || !currBlogData.data || currBlogData.data.length === 0) {
-    return <div>No blog found for slug: {prop.params.slug}</div>;
+    return <div>No blog found for slug: {params.slug}</div>;
   }
-  /* console.log(currBlogData.data[0].attributes.body); */
 
   const content: BlocksContent = currBlogData?.data[0].attributes.body;
+
   return (
     <>
       <>
-        <div className=" mx-auto sm:mb-60 ">
+        <div className=" mx-auto  relative">
           <div className="overflow-hidden relative h-[100vh]">
             <Image
               src={`${config.api}${currBlogData.data[0].attributes.FeatureImg.data.attributes.url}`}
@@ -108,15 +113,28 @@ export default function BlogSite(prop: any) {
               By {currBlogData.data[0].attributes.author}
             </span>
           </div>
-          <div className="prose prose-p:text-2xl prose-ul:text-2xl max-w-4xl mx-6 mt-8 lg:mx-auto mb-8 xl:mb-36 font-jost">
-            <h3 className="text-3xl mb-4">
+          <div className="prose prose-p:text-2xl prose-ul:text-2xl max-w-4xl mx-6 mt-8 lg:mx-auto pb-20   font-jost">
+            <h3 className="text-3xl ">
               {currBlogData.data[0].attributes.title}
             </h3>
 
             <BlocksRenderer content={content} />
           </div>
+          <Image
+            src={bgWaveGray}
+            alt="Background wave gray"
+            className="w-max absolute -z-10 left-0 bottom-0 "
+          />
         </div>
-        <RecentBlogs />
+        <div className="bg-[#f7f7f7] relative z-10">
+          <RecentBlogs />
+          <Image
+            src={bgWaveWhite}
+            alt="Background wave white"
+            className="w-max absolute -z-10 left-0 bottom-0 "
+          />
+        </div>
+
         <Newsletter />
       </>
     </>

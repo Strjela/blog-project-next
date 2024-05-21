@@ -1,7 +1,7 @@
 import Image from "next/image";
-import banner from "../../../public/images/banner-logos.jpg.webp";
-import welcomeImg from "../../../public/images/pexels-chiecharon-705075.jpg";
-import backgroundWaveGray from "../../../public/images/landingWave.svg";
+import banner from "../../../../public/images/banner-logos.jpg.webp";
+import welcomeImg from "../../../../public/images/pexels-chiecharon-705075.jpg";
+import bgWaveGray from "../../../../public/images/bgWaveGray.svg";
 import { IoIosNavigate } from "react-icons/io";
 
 export default function IntroLandingPage() {
@@ -30,7 +30,7 @@ export default function IntroLandingPage() {
           />
         </div>
         <Image
-          src={backgroundWaveGray}
+          src={bgWaveGray}
           alt="landingWave"
           className="w-max absolute left-0 bottom-0 "
         />

@@ -1,12 +1,12 @@
 import Image from "next/image";
-import newsImg from "../../../public/images/newsTree.jpg";
+import newsletterImg from "../../../../public/images/newsletterImg.jpg";
 
 export default function Newsletter() {
   return (
     <section className="relative flex flex-col justify-start mt-12 overflow-hidden py-8 px-4 mx-auto  lg:py-16 lg:px-6 h-[50vh] md:h-[70vh] lg:h-[90vh]">
       <div className="absolute inset-0 z-[1]">
         <Image
-          src={newsImg}
+          src={newsletterImg}
           alt="Background Image"
           quality={100}
           priority

@@ -2,7 +2,7 @@ import Image from "next/image";
 import contactImg from "../../../public/images/contactImage.jpg";
 import contactWave from "../../../public/images/contactWave.svg";
 
-import Newsletter from "../components/Newsletter";
+import Newsletter from "../components/layout/Newsletter";
 
 export default function Contact() {
   return (

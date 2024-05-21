@@ -1,17 +1,15 @@
 "use client";
 
 import useSWR from "swr";
-import config from "../config";
+import config from "../../config";
 import CategoryCard from "./CategoryCard";
 import qs from "qs";
+import { CategoryBlogItem } from "../../types/CategoryPostTypes";
 
 const query = qs.stringify({
   populate: ["FeatureImg"], // Specify the relationships to populate
   fields: ["title", "slug", "category"], // Specify the fields to include
   filters: { isCategory: { $eq: true } },
-  pagination: {
-    limit: 3, // Limit the number of results to 3
-  },
 });
 
 export default function CategoryLandingPage() {
@@ -19,9 +17,7 @@ export default function CategoryLandingPage() {
     data: categoryBlog,
     error: errorCategoryBlog,
     isLoading: isLoadingCategoryBlog,
-  } = useSWR(
-    `${config.api}/api/articles?populate=*&filters[isCategory][$eq]=true`
-  );
+  } = useSWR(`${config.api}/api/articles?${query}`);
 
   return (
     <>
@@ -41,7 +37,7 @@ export default function CategoryLandingPage() {
         {isLoadingCategoryBlog ? (
           <h2>Loading..</h2>
         ) : (
-          categoryBlog.data.map((item: any) => (
+          categoryBlog.data.map((item: CategoryBlogItem) => (
             <CategoryCard
               key={item.id} // Assuming 'id' is a unique identifier
               title={item.attributes.title}

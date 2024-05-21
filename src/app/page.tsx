@@ -1,10 +1,9 @@
-import Hero from "./components/Hero";
-import Newsletter from "./components/Newsletter";
-
+import Hero from "./components/landingPage/Hero";
+import Newsletter from "./components/layout/Newsletter";
 import RecentBlogs from "./components/RecentBlogs";
-import IntroLandingPage from "./components/IntroLandingPage";
-import FeaturedBlogs from "./components/FeaturePosts";
-import CategoryLandingPage from "./components/CategoryLandingPage";
+import IntroLandingPage from "./components/landingPage/IntroLandingPage";
+import FeaturedBlogs from "./components/FeatureBlogs";
+import CategoryLandingPage from "./components/landingPage/CategoryLandingPage";
 
 export default function Home() {
   return (

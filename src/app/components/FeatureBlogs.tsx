@@ -3,9 +3,10 @@
 import Image from "next/image";
 import config from "../config";
 import useSWR from "swr";
-import landingWhite from "../../../public/images/landingWhite.svg";
-import Card from "../components/Card";
+import bgWaveWhite from "../../../public/images/bgWaveWhite.svg";
+import Card from "./Card";
 import qs from "qs";
+import { BlogItem } from "../types/CardTypes";
 
 const query = qs.stringify({
   populate: ["FeatureImg"], // Specify the relationships to populate
@@ -35,7 +36,7 @@ export default function FeaturedBlogs() {
             {isLoadingFeatureBlog ? (
               <h2>Loading..</h2>
             ) : (
-              featureBlog.data.map((item: any) => (
+              featureBlog.data.map((item: BlogItem) => (
                 <Card
                   key={item.id} // Assuming 'id' is a unique identifier
                   title={item.attributes.title}
@@ -51,7 +52,7 @@ export default function FeaturedBlogs() {
       </main>
       <div className="relative w-full z-10">
         <Image
-          src={landingWhite}
+          src={bgWaveWhite}
           alt="landingWave"
           className="w-max absolute left-0 bottom-0"
         />

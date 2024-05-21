@@ -1,11 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 
 import Image from "next/image";
-import AboutImg from "../../../public/images/holly-mandarich-UVyOfX3v0Ls-unsplash.jpg";
+import AboutImg from "../../../public/images/aboutImg.jpg";
 import AboutWave from "../../../public/images/aboutWave.svg";
 
-import fetchData from "../getAllBlogs";
-import Newsletter from "../components/Newsletter";
+import Newsletter from "../components/layout/Newsletter";
 
 const About = async () => {
   /*   const data = await fetchData();

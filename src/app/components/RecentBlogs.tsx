@@ -5,6 +5,7 @@ import Link from "next/link";
 import useSWR from "swr";
 import Card from "./Card";
 import qs from "qs";
+import { BlogItem } from "../types/CardTypes";
 
 const query = qs.stringify({
   populate: ["FeatureImg"], // Specify the relationships to populate
@@ -23,7 +24,7 @@ export default function RecentBlogs() {
   } = useSWR(`${config.api}/api/articles?${query}`);
 
   return (
-    <div className="max-w-6xl mx-auto mt-20">
+    <div className="max-w-6xl mx-auto pt-20">
       <div className=" flex justify-between px-8">
         <h2 className=" text-[#73778C]  text-3xl leading-10 font-normal font-jost ">
           Recent Posts
@@ -38,7 +39,7 @@ export default function RecentBlogs() {
         {isLoadingRecentBlog ? (
           <h2>Loading..</h2>
         ) : (
-          recentBlog.data.map((item: any) => (
+          recentBlog.data.map((item: BlogItem) => (
             <Card
               key={item.id} // Assuming 'id' is a unique identifier
               title={item.attributes.title}

@@ -1,13 +1,11 @@
 "use client";
 
-import Image from "next/image";
-import logo from "../../../public/images/logo.png";
-import React, { FC, ReactNode, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useScrollPosition } from "../hooks/useScrollPosition";
-import { useReadingProgress } from "../hooks/useReadingProgress";
+import { useScrollPosition } from "../../hooks/useScrollPosition";
+import { useReadingProgress } from "../../hooks/useReadingProgress";
 
 export default function Header() {
   const [nav, setNav] = useState(false);
@@ -133,8 +131,6 @@ export default function Header() {
           </ul>
         </div>
       </div>
-
-      {/* Logo */}
     </header>
   );
 }
