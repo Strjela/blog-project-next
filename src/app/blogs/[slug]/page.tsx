@@ -1,6 +1,5 @@
 "use client";
 
-/* import test from "../../../public/images/test.jpg"; */
 import Image from "next/image";
 import config from "@/app/config";
 import {
@@ -10,7 +9,7 @@ import {
 import Newsletter from "@/app/components/layout/Newsletter";
 import RecentBlogs from "@/app/components/RecentBlogs";
 
-import bogWave from "../../../../public/images/blogWave.svg";
+import blogWave from "../../../../public/images/blogWave.svg";
 import qs from "qs";
 import useSWR from "swr";
 import bgWaveGray from "../../../../public/images/bgWaveGray.svg";
@@ -72,7 +71,7 @@ export default function BlogSite({ params }: BlogSiteProps) {
 
             <Image
               priority
-              src={bogWave}
+              src={blogWave}
               alt="wave"
               className="bottom-0 left-0 w-full absolute"
             />
