@@ -25,7 +25,8 @@ export default function IntroLandingPage() {
           </div>
           <Image
             src={welcomeImg}
-            alt="about image"
+            alt="Welcome Image"
+            priority
             className="rounded-2xl z-20 "
           />
         </div>

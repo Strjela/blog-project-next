@@ -1,6 +1,6 @@
 import Image from "next/image";
 import config from "../../config";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { CategoryCardProps } from "../../types/CategoryPostTypes";
 
 export default function CategoryCard({
@@ -19,6 +19,7 @@ export default function CategoryCard({
                 alt="Random image"
                 width={500}
                 height={500}
+                priority
                 className="object-cover w-full h-full transition duration-500 cursor-pointer hover:scale-105"
               />
             </div>

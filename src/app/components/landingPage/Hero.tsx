@@ -1,8 +1,8 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 export default function Hero() {
   return (
-    <section className=" h-[100vh] relative w-auto overflow-hidden flex justify-center items-end">
+    <section className=" h-[100vh] relative w-auto overflow-hidden flex justify-center items-end ">
       <div className="bg-fixed  w-[1240px]  px-4 sm:px-8  ">
         <div className="relative  z-30 pb-44 flex flex-col gap-6 ">
           <h2 className="font-jost text-2xl sm:text-3xl lg:text-3xl font-bold text-slate-100">
@@ -25,6 +25,7 @@ export default function Hero() {
       >
         <source src="/video/pozadinaVideo.mp4" type="video/mp4" />
       </video>
+      <div className="absolute inset-0 bg-gradient-to-r from-black from-2%" />
     </section>
   );
 }

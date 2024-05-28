@@ -7,8 +7,9 @@ import bgWaveWhite from "../../../public/images/bgWaveWhite.svg";
 import Card from "./Card";
 import qs from "qs";
 import { BlogItem } from "../types/CardTypes";
+import SkeletonCards from "./skeletons/skeletonCards";
 
-const query = qs.stringify({
+const getFeaturedBlogs = qs.stringify({
   populate: ["FeatureImg"], // Specify the relationships to populate
   fields: ["title", "slug", "category", "description"], // Specify the fields to include
   filters: { isFeatured: { $eq: true } },
@@ -22,7 +23,7 @@ export default function FeaturedBlogs() {
     data: featureBlog,
     error: errorFeatureBlog,
     isLoading: isLoadingFeatureBlog,
-  } = useSWR(`${config.api}/api/articles?${query}`);
+  } = useSWR(`${config.api}/api/articles?${getFeaturedBlogs}`);
 
   return (
     <div className="bg-[#f7f7f7]">
@@ -33,8 +34,8 @@ export default function FeaturedBlogs() {
           </h2>
 
           <ul className="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8 font-jost pb-36 ">
-            {isLoadingFeatureBlog ? (
-              <h2>Loading..</h2>
+            {isLoadingFeatureBlog || errorFeatureBlog ? (
+              <SkeletonCards />
             ) : (
               featureBlog.data.map((item: BlogItem) => (
                 <Card

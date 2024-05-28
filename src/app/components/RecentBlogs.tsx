@@ -1,11 +1,12 @@
 "use client";
 
 import config from "../config";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import useSWR from "swr";
 import Card from "./Card";
 import qs from "qs";
 import { BlogItem } from "../types/CardTypes";
+import SkeletonCards from "./skeletons/skeletonCards";
 
 const query = qs.stringify({
   populate: ["FeatureImg"], // Specify the relationships to populate
@@ -36,8 +37,8 @@ export default function RecentBlogs() {
         </Link>
       </div>
       <ul className="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8 font-jost pb-36 ">
-        {isLoadingRecentBlog ? (
-          <h2>Loading..</h2>
+        {isLoadingRecentBlog || errorRecentBlog ? (
+          <SkeletonCards />
         ) : (
           recentBlog.data.map((item: BlogItem) => (
             <Card

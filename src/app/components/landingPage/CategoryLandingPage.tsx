@@ -6,9 +6,9 @@ import CategoryCard from "./CategoryCard";
 import qs from "qs";
 import { CategoryBlogItem } from "../../types/CategoryPostTypes";
 
-const query = qs.stringify({
-  populate: ["FeatureImg"], // Specify the relationships to populate
-  fields: ["title", "slug", "category"], // Specify the fields to include
+const getCategoryBlogs = qs.stringify({
+  populate: ["FeatureImg"],
+  fields: ["title", "slug", "category"],
   filters: { isCategory: { $eq: true } },
 });
 
@@ -17,7 +17,7 @@ export default function CategoryLandingPage() {
     data: categoryBlog,
     error: errorCategoryBlog,
     isLoading: isLoadingCategoryBlog,
-  } = useSWR(`${config.api}/api/articles?${query}`);
+  } = useSWR(`${config.api}/api/articles?${getCategoryBlogs}`);
 
   return (
     <>

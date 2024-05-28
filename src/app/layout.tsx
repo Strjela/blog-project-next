@@ -5,6 +5,8 @@ import "./globals.css";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Providers from "./Providers";
+import { ViewTransitions } from "next-view-transitions";
+import SplashScreenManager from "./components/splashScreen/SplashScreenManager";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const sedgwick = Sedgwick_Ave_Display({
@@ -30,16 +32,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.className} ${sedgwick.variable} ${jost.variable}  `}
-      >
-        <Providers>
-          <Header />
-          {children}
-          <Footer />
-        </Providers>
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="en">
+        <body
+          className={`${inter.className} ${sedgwick.variable} ${jost.variable}  `}
+        >
+          <SplashScreenManager>
+            <Providers>
+              <Header />
+              {children}
+              <Footer />
+            </Providers>
+          </SplashScreenManager>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

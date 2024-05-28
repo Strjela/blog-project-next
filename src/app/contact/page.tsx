@@ -10,8 +10,6 @@ export default function Contact() {
       <div className="overflow-hidden relative h-[100vh]">
         <Image
           src={contactImg}
-          width={10000}
-          height={1000}
           alt="test"
           priority
           className=" h-[100vh] absolute w-full object-cover "

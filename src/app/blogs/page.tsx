@@ -8,16 +8,30 @@ import Card from "../components/Card";
 import Image from "next/image";
 import allBlogsWave from "../../../public/images/allBlogsWave.svg";
 import { BlogItem } from "../types/CardTypes";
+import qs from "qs";
+import SkeletonCards from "../components/skeletons/skeletonCards";
+
+const getBlogData = qs.stringify({
+  populate: ["FeatureImg"], // Specify the relationships to populate
+  fields: ["title", "slug", "category", "description"], // Specify the fields to include
+});
 
 const Blogs = () => {
-  const [pageIndex, setPageIndex] = useState(1);
+  /* const [pageIndex, setPageIndex] = useState(1); */
+  const [searchQuery, setSearchQuery] = useState("");
 
   const {
     data,
-    error: errorFeatureBlog,
+    error: isErrorCurrBlog,
     isLoading: isLoadingBlogs,
-  } = useSWR(
-    `${config.api}/api/articles?populate=*&pagination[page]=${pageIndex}&pagination[pageSize]=6`
+  } = useSWR(`${config.api}/api/articles?${getBlogData}`);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredBlogs = data?.data.filter((item: BlogItem) =>
+    item.attributes.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -33,11 +47,18 @@ const Blogs = () => {
         <div>
           <h2 className="text-3xl font-jost mb-8">All Blog Posts</h2>
         </div>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={handleSearchChange}
+          placeholder="Search by title"
+          className="mb-8 p-3 border font-semibold rounded w-full font-jost md:w-[35%]"
+        />
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start ">
-          {isLoadingBlogs ? (
-            <h2>Loading..</h2>
+          {isLoadingBlogs || isErrorCurrBlog ? (
+            <SkeletonCards />
           ) : (
-            data.data.map((item: BlogItem) => (
+            filteredBlogs.map((item: BlogItem) => (
               <Card
                 key={item.id} // Assuming 'id' is a unique identifier
                 title={item.attributes.title}
@@ -50,7 +71,7 @@ const Blogs = () => {
           )}
         </div>
       </div>
-      <div className="flex justify-center max-w-6xl mt-8 mx-auto font font-jost">
+      {/*    <div className="flex justify-center max-w-6xl mt-8 mx-auto font font-jost">
         <div className="space-x-4 space-y-4 text-lg">
           <button
             className={`md:p-2 rounded-xl py-2 text-black p-2 ${
@@ -77,7 +98,7 @@ const Blogs = () => {
             Next
           </button>
         </div>
-      </div>
+      </div> */}
 
       <Newsletter />
     </>

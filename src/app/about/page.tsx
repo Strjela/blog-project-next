@@ -3,21 +3,14 @@
 import Image from "next/image";
 import AboutImg from "../../../public/images/aboutImg.jpg";
 import AboutWave from "../../../public/images/aboutWave.svg";
-
 import Newsletter from "../components/layout/Newsletter";
 
 const About = async () => {
-  /*   const data = await fetchData();
-  console.log(data.data); */
   return (
     <>
-      {/*  <h1>{data.data[1].attributes.title}</h1>
-      <BlogPage /> */}
       <div className="overflow-hidden relative h-[100vh]">
         <Image
           src={AboutImg}
-          width={10000}
-          height={1000}
           alt="test"
           priority
           className=" h-[100vh] absolute w-full object-cover "

@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import Link from "next/link";
+/* import { Link } from 'next-view-transitions'; */
+import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { useScrollPosition } from "../../hooks/useScrollPosition";
 import { useReadingProgress } from "../../hooks/useReadingProgress";
@@ -12,6 +13,7 @@ export default function Header() {
   const currentRoute = usePathname();
 
   const completion = useReadingProgress();
+  /* If scrollPosition is 0 NavBar is transparent otherwise its white */
   const scrollPosition = useScrollPosition();
   // Toggle function to handle the navbar's display
   const handleNav = () => {
@@ -21,7 +23,7 @@ export default function Header() {
   function classNames(...classes: any[]) {
     return classes.filter(Boolean).join(" ");
   }
-  // Array containing navigation items
+
   const navItems = [
     { id: 1, text: "HOME", link: "/" },
     { id: 2, text: "BLOGS", link: "/blogs" },
@@ -33,7 +35,7 @@ export default function Header() {
     <header className="sticky z-40 w-full top-0  ">
       <div
         className={classNames(
-          scrollPosition > 0 ? "bg-white shadow-lg   px-4" : "bg-transparent",
+          scrollPosition > 0 ? "bg-white shadow-lg  px-4" : "bg-transparent",
           "absolute mx-auto min-w-full ease-out duration-500 top-0"
         )}
       >
