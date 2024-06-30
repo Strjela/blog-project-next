@@ -1,7 +1,8 @@
+"use client";
+
 import Image from "next/image";
-import config from "../config";
 import { Link } from "next-view-transitions";
-import { BlogCardProps } from "../types/CardTypes";
+import { BlogCardProps } from "../../types/CardTypes";
 import { usePathname } from "next/navigation";
 
 function getColorCategory(category: string) {
@@ -29,8 +30,6 @@ export default function Card({
   const colorCategory = getColorCategory(category);
 
   const currentRoute = usePathname();
-
-  console.log(currentRoute);
 
   const path = currentRoute.startsWith("/blogs/") ? `${slug}` : `blogs/${slug}`;
 
@@ -68,9 +67,9 @@ export default function Card({
       </div>
       <Link href={path}>
         <Image
-          src={`${config.api}${featureImgUrl}`}
+          src={`${process.env.NEXT_PUBLIC_API_ENDPOINT}${featureImgUrl}`}
           alt=""
-          className="  rounded-t-xl sm:rounded-bl-xl sm:rounded-tr-none xl:rounded-t-xl  xl:rounded-b-none w-full      lg:h-[28vh] hover:scale-105 transition duration-500 cursor-pointer object-cover  "
+          className="  rounded-t-xl sm:rounded-bl-xl sm:rounded-tr-none xl:rounded-t-xl  xl:rounded-b-none w-full      lg:h-[31vh] hover:scale-105 transition duration-500 cursor-pointer object-cover  "
           width={500}
           height={500}
           priority

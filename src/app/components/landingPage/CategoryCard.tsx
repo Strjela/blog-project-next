@@ -1,5 +1,4 @@
 import Image from "next/image";
-import config from "../../config";
 import { Link } from "next-view-transitions";
 import { CategoryCardProps } from "../../types/CategoryPostTypes";
 
@@ -15,7 +14,7 @@ export default function CategoryCard({
           <div className="absolute inset-0">
             <div className="absolute inset-0">
               <Image
-                src={`${config.api}${featureImgUrl}`}
+                src={`${process.env.NEXT_PUBLIC_API_ENDPOINT}${featureImgUrl}`}
                 alt="Random image"
                 width={500}
                 height={500}

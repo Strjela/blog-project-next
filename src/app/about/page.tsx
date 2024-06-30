@@ -5,7 +5,7 @@ import AboutImg from "../../../public/images/aboutImg.jpg";
 import AboutWave from "../../../public/images/aboutWave.svg";
 import Newsletter from "../components/layout/Newsletter";
 
-const About = async () => {
+const About = () => {
   return (
     <>
       <div className="overflow-hidden relative h-[100vh]">
@@ -18,6 +18,7 @@ const About = async () => {
         <Image
           src={AboutWave}
           alt="wave"
+          priority
           className="bottom-0 left-0 w-full absolute"
         />
       </div>

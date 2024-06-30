@@ -1,12 +1,13 @@
+/* eslint-disable @next/next/no-sync-scripts */
+/* eslint-disable react/jsx-no-comment-textnodes */
 import type { Metadata } from "next";
 import { Inter, Jost, Sedgwick_Ave_Display } from "next/font/google";
-
 import "./globals.css";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
-import Providers from "./Providers";
 import { ViewTransitions } from "next-view-transitions";
 import SplashScreenManager from "./components/splashScreen/SplashScreenManager";
+import CookieConsentBanner from "./components/utils/CookiesBanner";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const sedgwick = Sedgwick_Ave_Display({
@@ -35,14 +36,13 @@ export default function RootLayout({
     <ViewTransitions>
       <html lang="en">
         <body
-          className={`${inter.className} ${sedgwick.variable} ${jost.variable}  `}
+          className={`${inter.className} ${sedgwick.variable} ${jost.variable}`}
         >
           <SplashScreenManager>
-            <Providers>
-              <Header />
-              {children}
-              <Footer />
-            </Providers>
+            <CookieConsentBanner />
+            <Header />
+            {children}
+            <Footer />
           </SplashScreenManager>
         </body>
       </html>

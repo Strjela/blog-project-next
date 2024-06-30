@@ -1,29 +1,15 @@
-"use client";
-
 import Image from "next/image";
-import config from "../config";
-import useSWR from "swr";
-import bgWaveWhite from "../../../public/images/bgWaveWhite.svg";
+import bgWaveWhite from "../../../../public/images/bgWaveWhite.svg";
 import Card from "./Card";
-import qs from "qs";
-import { BlogItem } from "../types/CardTypes";
-import SkeletonCards from "./skeletons/skeletonCards";
+import { BlogItem } from "../../types/CardTypes";
+import SkeletonCards from "../skeletons/skeletonCards";
+import { query } from "../../services/ApolloClient";
+import { GET_FEATURED_ARTICLES } from "../../services/querys";
 
-const getFeaturedBlogs = qs.stringify({
-  populate: ["FeatureImg"], // Specify the relationships to populate
-  fields: ["title", "slug", "category", "description"], // Specify the fields to include
-  filters: { isFeatured: { $eq: true } },
-  pagination: {
-    limit: 3, // Limit the number of results to 3
-  },
-});
-
-export default function FeaturedBlogs() {
-  const {
-    data: featureBlog,
-    error: errorFeatureBlog,
-    isLoading: isLoadingFeatureBlog,
-  } = useSWR(`${config.api}/api/articles?${getFeaturedBlogs}`);
+export default async function FeaturedBlogs() {
+  const { data, error, loading } = await query({
+    query: GET_FEATURED_ARTICLES,
+  });
 
   return (
     <div className="bg-[#f7f7f7]">
@@ -34,12 +20,12 @@ export default function FeaturedBlogs() {
           </h2>
 
           <ul className="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8 font-jost pb-36 ">
-            {isLoadingFeatureBlog || errorFeatureBlog ? (
+            {loading || error ? (
               <SkeletonCards />
             ) : (
-              featureBlog.data.map((item: BlogItem) => (
+              data.articles.data.map((item: BlogItem) => (
                 <Card
-                  key={item.id} // Assuming 'id' is a unique identifier
+                  key={item.id}
                   title={item.attributes.title}
                   slug={item.attributes.slug}
                   category={item.attributes.category}

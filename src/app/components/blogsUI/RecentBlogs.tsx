@@ -1,28 +1,12 @@
-"use client";
-
-import config from "../config";
 import { Link } from "next-view-transitions";
-import useSWR from "swr";
 import Card from "./Card";
-import qs from "qs";
-import { BlogItem } from "../types/CardTypes";
-import SkeletonCards from "./skeletons/skeletonCards";
+import { BlogItem } from "../../types/CardTypes";
+import SkeletonCards from "../skeletons/skeletonCards";
+import { query } from "../../services/ApolloClient";
+import { GET_RECENT_ARTICLES } from "../../services/querys";
 
-const query = qs.stringify({
-  populate: ["FeatureImg"], // Specify the relationships to populate
-  fields: ["title", "slug", "category", "description"], // Specify the fields to include
-  filters: { isCategory: { $eq: false } },
-  pagination: {
-    limit: 3, // Limit the number of results to 3
-  },
-});
-
-export default function RecentBlogs() {
-  const {
-    data: recentBlog,
-    error: errorRecentBlog,
-    isLoading: isLoadingRecentBlog,
-  } = useSWR(`${config.api}/api/articles?${query}`);
+export default async function RecentBlogs() {
+  const { data, error, loading } = await query({ query: GET_RECENT_ARTICLES });
 
   return (
     <div className="max-w-6xl mx-auto pt-20">
@@ -30,6 +14,7 @@ export default function RecentBlogs() {
         <h2 className=" text-[#73778C]  text-3xl leading-10 font-normal font-jost ">
           Recent Posts
         </h2>
+
         <Link href={"/blogs"}>
           <button className="font-medium text-black bg-none border-none outline-none shadow-none">
             See All
@@ -37,12 +22,12 @@ export default function RecentBlogs() {
         </Link>
       </div>
       <ul className="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8 font-jost pb-36 ">
-        {isLoadingRecentBlog || errorRecentBlog ? (
+        {loading || error ? (
           <SkeletonCards />
         ) : (
-          recentBlog.data.map((item: BlogItem) => (
+          data.articles.data.map((item: BlogItem) => (
             <Card
-              key={item.id} // Assuming 'id' is a unique identifier
+              key={item.id}
               title={item.attributes.title}
               slug={item.attributes.slug}
               category={item.attributes.category}

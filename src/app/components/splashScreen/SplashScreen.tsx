@@ -11,7 +11,7 @@ export default function SplashScreen({ finishLoading }: any) {
     });
     loader.add({
       targets: "#logo",
-      translateX: 1000,
+      translateX: 500,
       scale: 1,
       loop: true,
       duration: 2000,

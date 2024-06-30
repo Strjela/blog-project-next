@@ -1,6 +1,6 @@
 export default function SkeletonCards() {
   return (
-    <div className="flex min- flex-row justify-center flex-wrap gap-12 my-16">
+    <div className="flex flex-wrap justify-center gap-10 xl:flex-nowrap xl:justify-normal ">
       <div className="relative bg-white p-4  shadow-xl ring-1 ring-gray-900/5  sm:max-w-sm rounded-lg">
         <div className="m-2 max-w-sm animate-pulse">
           <div className="flex items-center justify-center h-48  bg-gray-300 dark:bg-gray-700 w-72">

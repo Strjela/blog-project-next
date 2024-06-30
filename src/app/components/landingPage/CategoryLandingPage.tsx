@@ -1,24 +1,13 @@
-"use client";
-
-import useSWR from "swr";
-import config from "../../config";
 import CategoryCard from "./CategoryCard";
-import qs from "qs";
 import { CategoryBlogItem } from "../../types/CategoryPostTypes";
+import Spinner from "../skeletons/spinnerLoading";
+import { query } from "@/app/services/ApolloClient";
+import { GET_CATEGORY_ARTICLES } from "@/app/services/querys";
 
-const getCategoryBlogs = qs.stringify({
-  populate: ["FeatureImg"],
-  fields: ["title", "slug", "category"],
-  filters: { isCategory: { $eq: true } },
-});
-
-export default function CategoryLandingPage() {
-  const {
-    data: categoryBlog,
-    error: errorCategoryBlog,
-    isLoading: isLoadingCategoryBlog,
-  } = useSWR(`${config.api}/api/articles?${getCategoryBlogs}`);
-
+export default async function CategoryLandingPage() {
+  const { data, loading } = await query({
+    query: GET_CATEGORY_ARTICLES,
+  });
   return (
     <>
       <div className="font-jost flex flex-col justify-center h-full items-center text-center mx-auto px-5 my-8 lg:my-16">
@@ -34,12 +23,12 @@ export default function CategoryLandingPage() {
         </p>
       </div>
       <div className="grid p-4 gap-4 lg:p-0 lg:gap-0 lg:grid-cols-2 lg:grid-rows-2 shadow-2xl  ">
-        {isLoadingCategoryBlog ? (
-          <h2>Loading..</h2>
+        {loading ? (
+          <Spinner />
         ) : (
-          categoryBlog.data.map((item: CategoryBlogItem) => (
+          data.articles.data.map((item: CategoryBlogItem) => (
             <CategoryCard
-              key={item.id} // Assuming 'id' is a unique identifier
+              key={item.id}
               title={item.attributes.title}
               slug={item.attributes.slug}
               featureImgUrl={item.attributes.FeatureImg.data.attributes.url}
