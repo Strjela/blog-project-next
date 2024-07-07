@@ -2,21 +2,13 @@
 
 import React, { useState } from "react";
 import { BlogItem } from "../../types/CardTypes";
-import SkeletonCards from "../skeletons/skeletonCards";
 import Card from "./Card";
-import { ApolloError } from "@apollo/client";
 
 interface FilterBlogsPropTypes {
   articles: BlogItem[];
-  loading: boolean;
-  error: ApolloError | undefined;
 }
 
-const FilterBlogs: React.FC<FilterBlogsPropTypes> = ({
-  articles,
-  loading,
-  error,
-}) => {
+const FilterBlogs: React.FC<FilterBlogsPropTypes> = ({ articles }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,20 +33,16 @@ const FilterBlogs: React.FC<FilterBlogsPropTypes> = ({
           className="mb-8 p-3 border font-semibold rounded w-full font-jost md:w-[35%]"
         />
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start scale-in-center">
-          {loading || error ? (
-            <SkeletonCards />
-          ) : (
-            filteredBlogs.map((item: BlogItem) => (
-              <Card
-                key={item.id} // Assuming 'id' is a unique identifier
-                title={item.attributes.title}
-                slug={item.attributes.slug}
-                category={item.attributes.category}
-                featureImgUrl={item.attributes.FeatureImg.data.attributes.url}
-                description={item.attributes.description}
-              />
-            ))
-          )}
+          {filteredBlogs.map((item: BlogItem) => (
+            <Card
+              key={item.id} // Assuming 'id' is a unique identifier
+              title={item.attributes.title}
+              slug={item.attributes.slug}
+              category={item.attributes.category}
+              featureImgUrl={item.attributes.FeatureImg.data.attributes.url}
+              description={item.attributes.description}
+            />
+          ))}
         </div>
       </div>
     </>
