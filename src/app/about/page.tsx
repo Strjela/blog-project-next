@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 
 import Image from "next/image";
-import AboutImg from "../../../public/images/aboutImg.jpg";
+import AboutImg from "../../../public/images/aboutMeImg.jpg";
 import AboutWave from "../../../public/images/aboutWave.svg";
 import Newsletter from "../components/layout/Newsletter";
 

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import banner from "../../../../public/images/banner-logos.jpg.webp";
-import welcomeImg from "../../../../public/images/pexels-chiecharon-705075.jpg";
+import welcomeImg from "../../../../public/images/welcomeImg.jpg";
 import bgWaveGray from "../../../../public/images/bgWaveGray.svg";
 import { IoIosNavigate } from "react-icons/io";
 

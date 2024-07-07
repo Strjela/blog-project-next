@@ -14,7 +14,7 @@ export default function SplashScreen({ finishLoading }: any) {
       translateX: 500,
       scale: 1,
       loop: true,
-      duration: 2000,
+      duration: 4000,
       easing: "easeInOutQuad",
     });
   };

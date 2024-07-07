@@ -1,5 +1,5 @@
 import Image from "next/image";
-import contactImg from "../../../public/images/contactImage.jpg";
+import contactImg from "../../../public/images/contactMeImg.jpg";
 import contactWave from "../../../public/images/contactWave.svg";
 
 import Newsletter from "../components/layout/Newsletter";
