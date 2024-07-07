@@ -23,15 +23,13 @@ const FilterBlogs: React.FC<FilterBlogsPropTypes> = ({
     setSearchQuery(e.target.value);
   };
 
-  console.log(articles);
-
   const filteredBlogs = articles.filter((item: BlogItem) =>
     item.attributes.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
     <>
-      <div className="max-w-7xl mx-auto mt-14 lg:px-8  px-4  bg-white">
+      <div className="max-w-7xl mx-auto mt-14 lg:px-8  px-4  bg-white scale-in-center">
         <div>
           <h2 className="text-3xl font-jost mb-8">All Blog Posts</h2>
         </div>
@@ -42,7 +40,7 @@ const FilterBlogs: React.FC<FilterBlogsPropTypes> = ({
           placeholder="Search by title"
           className="mb-8 p-3 border font-semibold rounded w-full font-jost md:w-[35%]"
         />
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start ">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start scale-in-center">
           {loading || error ? (
             <SkeletonCards />
           ) : (

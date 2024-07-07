@@ -12,6 +12,8 @@ import bgWaveWhite from "../../../../public/images/bgWaveWhite.svg";
 import "react-quill/dist/quill.snow.css";
 import { query } from "@/app/services/ApolloClient";
 import { GET_ARTICLE } from "@/app/services/querys";
+import Spinner from "@/app/components/skeletons/spinnerLoading";
+import NotFound from "../../not-found";
 
 interface BlogSiteProps {
   params: {
@@ -27,23 +29,20 @@ export default async function BlogSite({ params }: BlogSiteProps) {
 
   const contents: BlocksContent = data?.articles?.data[0]?.attributes.body;
 
-  // Check if data is loading
   if (loading) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
-  // Check if there's an error fetching data
   if (error) {
-    return <div>Error loading blog: {error.message}</div>;
+    return <NotFound />;
   }
 
-  // Check if data is available
   if (
     !data.articles ||
     !data.articles.data ||
     data.articles.data.length === 0
   ) {
-    return <div>No blog found for slug: {params.slug}</div>;
+    return <NotFound />;
   }
 
   return (
@@ -52,9 +51,9 @@ export default async function BlogSite({ params }: BlogSiteProps) {
         <div className=" mx-auto  relative">
           <div className="overflow-hidden relative h-[100vh]">
             <Image
-              src={`${process.env.NEXT_PUBLIC_API_ENDPOINT}${data.articles.data[0].attributes.FeatureImg.data.attributes.url}`}
-              width={1000}
-              height={1000}
+              src={`${data.articles.data[0].attributes.FeatureImg.data.attributes.url}`}
+              width={500}
+              height={500}
               alt="test"
               priority
               className=" h-[100vh] absolute w-full object-cover "
@@ -94,7 +93,7 @@ export default async function BlogSite({ params }: BlogSiteProps) {
 
           <div className="flex justify-start items-center gap-4 max-w-4xl mx-auto">
             <Image
-              src={`${process.env.NEXT_PUBLIC_API_ENDPOINT}${data.articles.data[0].attributes.avatar.data.attributes.url}`}
+              src={`${data.articles.data[0].attributes.avatar.data.attributes.url}`}
               alt={"Author Image"}
               width={100}
               height={100}
@@ -104,8 +103,8 @@ export default async function BlogSite({ params }: BlogSiteProps) {
               By {data.articles.data[0].attributes.author}
             </span>
           </div>
-          <div className="prose prose-p:text-2xl prose-ul:text-2xl max-w-4xl mx-6 mt-8 lg:mx-auto pb-20   font-jost">
-            <h3 className="text-3xl ">
+          <div className="prose prose-p:text-2xl prose-ul:text-2xl prose-h3:text-3xl max-w-4xl mx-6 mt-8 lg:mx-auto pb-20   font-jost">
+            <h3 className="text-5xl ">
               {data.articles.data[0].attributes.title}
             </h3>
 

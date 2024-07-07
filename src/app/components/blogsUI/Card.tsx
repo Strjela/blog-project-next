@@ -4,6 +4,8 @@ import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { BlogCardProps } from "../../types/CardTypes";
 import { usePathname } from "next/navigation";
+import { useRef } from "react";
+import { useIsVisible } from "@/app/hooks/useIsVisible";
 
 function getColorCategory(category: string) {
   switch (category) {
@@ -33,8 +35,16 @@ export default function Card({
 
   const path = currentRoute.startsWith("/blogs/") ? `${slug}` : `blogs/${slug}`;
 
+  const ref = useRef(null);
+  const isVisible = useIsVisible(ref);
+
   return (
-    <li className=" flex flex-col sm:flex-row xl:flex-col items-start bg-white rounded-xl shadow-xl  overflow-hidden">
+    <li
+      ref={ref}
+      className={`flex flex-col sm:flex-row xl:flex-col items-start bg-white rounded-xl shadow-xl overflow-hidden transition-opacity ease-in duration-700 ${
+        isVisible ? "opacity-100" : "opacity-0"
+      }`}
+    >
       <div className=" order-1 overflow-hidden p-7 sm:pb-0 sm:pt-0 sm:mt-3 sm:w-[40%] lg:w-[70%] xl:w-auto">
         <h3 className=" text-slate-900 font-semibold text-lg font-jost tracking-wider line-clamp-3 ">
           <span className={`block text-base leading-6  mb-3 ${colorCategory}`}>
@@ -67,7 +77,7 @@ export default function Card({
       </div>
       <Link href={path}>
         <Image
-          src={`${process.env.NEXT_PUBLIC_API_ENDPOINT}${featureImgUrl}`}
+          src={`${featureImgUrl}`}
           alt=""
           className="  rounded-t-xl sm:rounded-bl-xl sm:rounded-tr-none xl:rounded-t-xl  xl:rounded-b-none w-full      lg:h-[31vh] hover:scale-105 transition duration-500 cursor-pointer object-cover  "
           width={500}

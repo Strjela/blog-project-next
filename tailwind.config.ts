@@ -1,4 +1,3 @@
-import { url } from "inspector";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -18,7 +17,7 @@ const config: Config = {
       },
     },
   },
-
   plugins: [require("@tailwindcss/typography")],
 };
+
 export default config;

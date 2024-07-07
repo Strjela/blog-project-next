@@ -7,15 +7,11 @@ const CookieConsentBanner = () => {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
-    console.log("Checking cookie consent status...");
-    const consentCookie = cookie.get("cookieConsent");
-    console.log("Consent cookie:", consentCookie);
-
     const timeoutId = setTimeout(() => {
       setShowBanner(true);
     }, 2000);
 
-    return () => clearTimeout(timeoutId); // Clean up the timeout on component unmount
+    return () => clearTimeout(timeoutId);
   }, []);
 
   const handleAccept = () => {
@@ -33,7 +29,7 @@ const CookieConsentBanner = () => {
   }
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-[5200] flex flex-col items-center bg-gray-800 text-white p-4 md:flex-row md:justify-between md:p-6">
+    <div className="fixed inset-x-0 bottom-0 z-[5200] flex flex-col items-center bg-gray-800 text-white p-4 md:flex-row md:justify-between md:p-6 scale-in-center">
       <div className="text-center md:text-left">
         <p>This website uses cookies to improve your browsing experience.</p>
         <p>Please click Accept to continue.</p>

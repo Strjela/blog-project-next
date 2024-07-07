@@ -14,7 +14,7 @@ export default function CategoryCard({
           <div className="absolute inset-0">
             <div className="absolute inset-0">
               <Image
-                src={`${process.env.NEXT_PUBLIC_API_ENDPOINT}${featureImgUrl}`}
+                src={`${featureImgUrl}`}
                 alt="Random image"
                 width={500}
                 height={500}
